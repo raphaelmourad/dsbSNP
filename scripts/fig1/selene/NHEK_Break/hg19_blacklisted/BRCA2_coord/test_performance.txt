@@ -1,0 +1,2 @@
+class	roc_auc	average_precision
+NHEK_Break	0.8624	0.1324

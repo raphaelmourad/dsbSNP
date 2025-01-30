@@ -1,0 +1,60 @@
+ops: [evaluate]
+
+
+
+
+
+model: {
+    # TODO: update this line with the absolute path to the file.
+    path: ./deeperdeepsea.py,
+    class: DeeperDeepSEA,
+    class_args: {
+        sequence_length: 1000,
+        n_targets: 1,
+    },
+    non_strand_specific: mean
+}
+
+
+
+sampler: !obj:selene_sdk.samplers.IntervalsSampler {
+    reference_sequence: !obj:selene_sdk.sequences.Genome {
+        # we include relative paths here, but we recommend using absolute
+        # paths for future configuration files
+        input_path: ./female.hg19.fasta
+    },
+    features: !obj:selene_sdk.utils.load_features_list {
+        input_path: ./pATM_seb_all/hg19_blacklisted/distinct_features.txt
+    },
+    target_path: ./BRCA2/hg19_blacklisted/sorted_coord_fromBRCA2_features_pATM.bed.gz,
+    intervals_path: ./deepsea_TF_intervals.txt,
+    seed: 127,
+    # A positive example is an 1000bp sequence with at least 1 class/feature annotated to it.
+    # A negative sample has no classes/features annotated to the sequence.
+    sample_negative: True,
+    sequence_length: 1000,
+    center_bin_to_predict: 200,
+    test_holdout: [chr8, chr9],
+    validation_holdout: [chr6, chr7],
+    # The feature must take up 50% of the bin (200bp) for it to be considered
+    # a feature annotated to that sequence.
+    feature_thresholds: 0.5,
+    mode: validate,
+    save_datasets: [validate, test,train],
+    output_dir: ./pATM_seb_all/hg19_blacklisted/BRCA2_coord/
+}
+
+evaluate_model: !obj:selene_sdk.EvaluateModel {
+    features:  !obj:selene_sdk.utils.load_features_list {
+        input_path: ./pATM_seb_all/hg19_blacklisted/distinct_features.txt
+    },
+    trained_model_path: ./pATM_seb_all/hg19_blacklisted/training_outputs/best_model.pth.tar,
+    batch_size: 64,
+    report_gt_feature_n_positives: 50,
+    use_cuda: True,
+    output_dir: ./pATM_seb_all/hg19_blacklisted/BRCA2_coord/
+}
+
+random_seed: 1447
+
+

@@ -1,0 +1,13 @@
+*model.pth.tar
+*pth.tar
+*bed
+*bed.gz
+*bed.gz.tbi*
+*.fasta
+*narrowPeak*
+*.bedgraph*
+*.NA
+.~lock*
+SNP_outputs
+*200b_all_genomes_predictions.tsv
+

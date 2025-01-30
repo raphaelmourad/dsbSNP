@@ -1,0 +1,2 @@
+class	roc_auc	average_precision
+lig4	NA	NA

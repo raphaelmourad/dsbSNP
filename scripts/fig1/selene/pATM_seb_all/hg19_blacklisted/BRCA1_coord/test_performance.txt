@@ -1,0 +1,2 @@
+class	roc_auc	average_precision
+pATM	0.8883	0.0971

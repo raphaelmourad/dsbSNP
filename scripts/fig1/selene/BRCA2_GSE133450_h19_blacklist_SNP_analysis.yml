@@ -1,0 +1,37 @@
+ops: [analyze]
+model: {
+    # TODO: update this line with the absolute path to the file.
+    path: ./deeperdeepsea.py,
+    class: DeeperDeepSEA,
+    class_args: {
+        sequence_length: 1000,
+        n_targets: 1,
+    },
+    non_strand_specific: mean
+}
+
+
+analyze_sequences: !obj:selene_sdk.predict.AnalyzeSequences {
+    sequence_length: 1000,
+    features: !obj:selene_sdk.utils.load_features_list {
+        input_path: ./BRCA2/hg19_blacklisted/distinct_features.txt
+    },
+    trained_model_path: ./53BP1/hg19_blacklisted/training_outputs/best_model.pth.tar,
+    use_cuda: True,  # TODO: update if CUDA is not enabled on your machine.
+    reference_sequence: !obj:selene_sdk.sequences.Genome {
+        input_path: ./female.hg19.fasta
+    }
+}
+
+variant_effect_prediction: {
+    vcf_files: [
+        ./SNP_1KG_nonGWAS_same_size_as_unique_1KG_GWAS.vcf,
+        ./SNP_GWAS_1KG_unique.vcf
+    ],
+    save_data: [abs_diffs, diffs, logits, predictions],
+    output_dir: ./BRCA2/hg19_blacklisted/SNP_outputs,
+    output_format: tsv,
+ }
+
+random_seed: 1000
+

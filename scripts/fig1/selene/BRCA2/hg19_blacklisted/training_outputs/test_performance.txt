@@ -1,0 +1,2 @@
+class	roc_auc	average_precision
+BRCA2	0.8343	0.1209
