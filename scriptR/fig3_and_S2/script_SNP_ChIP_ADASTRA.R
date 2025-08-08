@@ -36,11 +36,6 @@ source("scriptR/misc_functions.R")
 # Mapped on hg38
 PvalT=0.1
 
-# also "ERCC2" ,"ERCC3" "ERCC6" for excision repair
-# "DDX5" to repair R loops
-# DMC1 = meiotic DSBs
-# MCM2 MCM3 MCM5 MCM7 = DNA replication
-# PRKDC = DNA PK (only 2 SNPs)
 protNames=c("ATM","BRCA1","BRCA2","NBN","RAD51") # dsbSNPs
 for(i in 1:length(protNames)){
  file_ChIPi=paste0("data/ADASTRA_allelic_imbalance_database/adastra.bill_cipher/release_dump/TF/",protNames[i],"_HUMAN.tsv")
@@ -113,11 +108,11 @@ pdf(file_annot_SNPs,6,6)
 plotAnnoPie(annot_SNP_DSB)
 dev.off()
 
-#########
+######### GET CONTROL SNPs
 
 kCtrlSNPs=10
 SNP_DSB.GR=SNP_DSB_Adastra.GR
-# Control SNPs as SNPs in LD with dsbSNPs (500kb away)
+# Control SNPs as SNPs in LD with dsbSNPs (500kb)
 dataSNP1KG=fread("data/SNP/1KG_SNPs_filt.bed",header=F,sep='\t')
 dataSNP1KG=dataSNP1KG[dataSNP1KG$V7>0.1,] # SNPs whose minor allele frequency > 10%
 dataSNP1KG=data.frame(dataSNP1KG)
@@ -142,13 +137,6 @@ save(SNP_ctrl.GR,file="results/allelic_imbalance/SNP_DSB/ADASTRA_SNP_ctrl_dist50
 
 write_bed(SNP_ctrl.GR,file="results/allelic_imbalance/SNP_DSB/ADASTRA_SNP_ctrl_dist500kb_GR.bed")
 
-df<-read.table("results/allelic_imbalance/SNP_DSB/ADASTRA_SNP_ctrl_dist500kb_GR.bed")
-df$V3<- df$V3+1
-
-write_tsv(df,file="results/allelic_imbalance/SNP_DSB/ADASTRA_SNP_ctrl_dist500kb_GR_deeptools.bed",col_names = F)
 
 
-
-
-SNP_DSB.GR
 

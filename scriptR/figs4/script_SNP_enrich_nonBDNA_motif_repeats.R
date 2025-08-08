@@ -57,25 +57,6 @@ SNP_ctrl.GR
 
 
 ###
-# GENE SET ENRICHMENT ANALYSIS (NO ENRICHMENT FOUND)
-
-dataGenes=read.table("data/genes/ucsc_genes_ensembl_hg19.csv",header=F,sep='\t')
-genes.GR=GRanges(dataGenes[,2],IRanges(dataGenes[,4],dataGenes[,5]),ENSG=dataGenes[,9])
-SNP_DSB.GR2=SNP_DSB.GR
-start(SNP_DSB.GR2)=start(SNP_DSB.GR2)-5e3
-end(SNP_DSB.GR2)=end(SNP_DSB.GR2)+5e3
-olGenes=findOverlaps(SNP_DSB.GR2,genes.GR)
-genes_DSB.GR=unique(genes.GR[subjectHits(olGenes)])
-
-ids_genes_DSB <- bitr(genes_DSB.GR$ENSG, fromType="ENSEMBL", toType="ENTREZID", OrgDb="org.Hs.eg.db")
-
-ego <- enrichGO(gene=ids_genes_DSB$ENTREZID, OrgDb='org.Hs.eg.db', ont="BP")
-ego
-barplot(ego)
-
-
-
-###
 # Non B DNA
 
 kCtrlSNPs=length(SNP_ctrl.GR)/length(SNP_DSB.GR) #
@@ -108,7 +89,7 @@ for(i in 1:length(bed_nonBDNA)){
 rownames(matEnrichNonBDNA)=c("AR","DR","G4","IR","MR","STR","Z-DNA")
 colnames(matEnrichNonBDNA)=c("DSB_SNP","CTRL_SNP","FC","p")
 matEnrichNonBDNA=data.frame(matEnrichNonBDNA)
-write.table(matEnrichNonBDNA,file="results/allelic_imbalance/nonBDNA/matEnrich_nonBDNA.csv",row.names=T,col.names=T,sep='\t',quote=F)
+#write.table(matEnrichNonBDNA,file="results/allelic_imbalance/nonBDNA/matEnrich_nonBDNA.csv",row.names=T,col.names=T,sep='\t',quote=F)
 
 matEnrichNonBDNAPlot=data.table(NonBDNA=rownames(matEnrichNonBDNA),NbSNP=c(matEnrichNonBDNA[,1],matEnrichNonBDNA[,2]),type=c(rep("DSB_SNP",7),rep("Ctrl_SNP",7)))
 matEnrichNonBDNAPlot$type=factor(matEnrichNonBDNAPlot$type,levels=c("DSB_SNP","Ctrl_SNP"))
@@ -134,16 +115,6 @@ for(sequ_name in sequ_list){
     dsb_ov<-dsb[queryHits(findOverlaps(dsb,sequ))]
     
     ctrl_ov<-ctrl[queryHits(findOverlaps(ctrl,sequ))]
-    
-    #ratio_eSNP<-mean(dsb_ov$score)/mean(ctrl_ov$score)
-    
-    
-    # dsb_no_eSNP_ov<-sequ[subjectHits(findOverlaps(dsb_no_eSNP,sequ))]
-    # 
-    # ctrl_no_eSNP_ov<-sequ[subjectHits(findOverlaps(ctrl_no_eSNP,sequ))]
-    # 
-    # ratio_no_eSNP<-mean(dsb_no_eSNP_ov$score)/mean(ctrl_no_eSNP_ov$score)
-    
     
     df<-data.frame(sequ_name,w)
     #df$ratio_no_eSNP<-ratio_no_eSNP

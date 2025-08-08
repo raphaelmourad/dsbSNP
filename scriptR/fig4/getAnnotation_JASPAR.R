@@ -1,7 +1,8 @@
 
 ##################################################################
-
-#This script is made to compute dsbSNp effect on TF motif score
+#Sébastien AUBER
+#10/07/2025
+#This script is made to compute dsbSNP effect on TF motif score
 ###################################################################
 library("Seurat")
 library("Signac")
@@ -18,11 +19,14 @@ library(ggplot2)
 library(plyranges)
 library(parallel)
 
+
 DSB_path="/media/sauber/Elements/DSBsnp_project_seb"
 setwd(DSB_path)
+#load dsb SNPs
 load(file="results/allelic_imbalance/SNP_DSB/SNP_DSB_ES_corrected_GR.RData")
 SNP_DSB.GR<-SNP_DSB.GR%>% anchor_center()%>%mutate(width = 100) 
 
+#"load JASPAR"
 JASPAR2024 <- JASPAR2024()
 JASPAR2024=db(JASPAR2024)
 #list of motif
@@ -31,8 +35,6 @@ pfm<-getMatrixSet(x=JASPAR2024,
 )
 
  
- heads(motif)
-
 
 Annotated_DSB_SNP<-matchMotifs(pfm,SNP_DSB.GR,genome='hg19',out = "position",bg = "genome")
 head((motif.matrix@data))
@@ -103,13 +105,7 @@ getAllelesSeq=function(region.GR,window=201,genome=BSgenome.Hsapiens.UCSC.hg19){
   
   return(list(as.character(region.seqRef),as.character(region.seqAlt)))
 }
-# SNP1.GR=GRanges("chr17",IRanges(31095150),REF="C",ALT="A",)
-# 
-# SNP2.GR=GRanges("chr7",IRanges(117559592,117559594),REF="CTT",ALT="-",rsid="rs113993960")
-# 
-# SNP3.GR=GRanges("chr11",IRanges(31664397),REF="C",ALT="A")
 
-# SNPs.GR=c(SNP1.GR,SNP2.GR,SNP3.GR)
 DSB_path="/media/sauber/Elements/DSBsnp_project_seb"
 setwd(DSB_path)
 load(file="results/allelic_imbalance/SNP_DSB/SNP_DSB_ES_corrected_GR.RData")
