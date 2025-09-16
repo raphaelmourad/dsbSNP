@@ -8,6 +8,8 @@ This is the github repository of our paper "A novel class of non-coding variants
 
 The dsbSNPs bed file is available here. All SNPs including dsbSNPs, but also histone mark SNPs, ATAC-seq SNPs, DRIP-seq SNPs are available here.
 
+Fastq files are available from MTAB accession XX, XX and XX. For now, they are only accessible to reviewers.
+
 ## Requirements
 
 The scripts were written with R, and need some packages :
