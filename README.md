@@ -2,11 +2,11 @@
 
 ## Overview
 
-This is the github repository of our paper "Non-coding variants driving DNA double-strand breaks are associated with complex genetic diseases".
+This is the github repository of our paper "A novel class of non-coding variants driving DNA double-strand breaks is associated with complex genetic diseases".
 
 ## Data Availability
 
-TODO: Paste the link to the table with all MTAB.
+The dsbSNPs bed file is available here. All SNPs including dsbSNPs, but also histone mark SNPs, ATAC-seq SNPs, DRIP-seq SNPs are available here.
 
 ## Requirements
 
