@@ -1,4 +1,4 @@
-# dsbSNP: Non-coding variants affecting DNA double-stranded breaks
+# dsbSNP: Non-coding variants of DNA double-stranded breaks
 
 ## Overview
 
