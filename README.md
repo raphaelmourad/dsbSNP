@@ -24,14 +24,6 @@ The scripts were written with R, and need some packages :
 
 ## Folders
 
-In this package, there are three main folders:
-
-- The folder "data" contains: XXX.
-- The folder "script" contains : XXX.
-  The folder "results" contains : XXX.
-
-## Figure generation
-
 Faire un tableau avec le nom des scripts et à quoi ils servent comme dans https://github.com/LegubeDNAREPAIR/LoopExtrusion
 
 ## Reference
@@ -40,4 +32,4 @@ XXX
 
 # Contact: 
 sebastien.auber@univ-tlse3.fr (PhD student)
-raphael.mourad@univ-tlse3.fr (PI)
+raphael.mourad@utoulouse.fr (PI)
