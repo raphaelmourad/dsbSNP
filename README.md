@@ -32,5 +32,5 @@ Faire un tableau avec le nom des scripts et à quoi ils servent comme dans https
 XXX
 
 # Contact: 
-sebastien.auber@univ-tlse3.fr (PhD student)
+sebastien.auber@univ-tlse3.fr (PhD student) \
 raphael.mourad@utoulouse.fr (PI)
