@@ -8,7 +8,8 @@ This is the github repository of our paper "A novel class of non-coding variants
 
 The dsbSNPs bed file is available: 
 - dsbSNPs_ADASTRA.tsv (for dsbSNPs from Legube's team data)
-- dsbSNPs_ADASTRA.tsv (for dsbSNPs extracted from ADASTRA database).\
+- dsbSNPs_ADASTRA.tsv (for dsbSNPs extracted from ADASTRA database).
+
 All SNPs including dsbSNPs, but also histone mark SNPs, ATAC-seq SNPs, DRIP-seq SNPs are available here.
 
 Fastq files are available from MTAB accession XX, XX and XX. For now, they are only accessible to reviewers.
