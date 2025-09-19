@@ -1,3 +1,5 @@
+![schema_dsbSNP_git](schema_dsbSNP_git.png)
+
 # dsbSNP: Non-coding variants of DNA double-stranded breaks
 
 ## Overview
