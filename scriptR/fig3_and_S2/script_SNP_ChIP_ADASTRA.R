@@ -89,6 +89,8 @@ length(unique(SNP_DSB_Adastra.GR[SNP_DSB_Adastra.GR$ATM>0]))
 write_bed(SNP_DSB_Adastra.GR,"results/allelic_imbalance/SNP_DSB/SNP_DSB_Adastra_GR.bed")
 ### 
 # PIE PROTEINS
+matEXPS=values(SNP_DSB_Adastra.GR)%>%as.data.frame%>%dplyr::select(-ID,-ref,-alt,-ES) #get matEXP without telomeric regions
+sort(colSums(matEXPS),decreasing=T)
 
 pie(colSums(matEXPS))
 
