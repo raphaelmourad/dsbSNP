@@ -29,7 +29,18 @@ The scripts were written with R, and need some packages :
 
 ## Folders
 
-Faire un tableau avec le nom des scripts et à quoi ils servent comme dans https://github.com/LegubeDNAREPAIR/LoopExtrusion
+| **Folder**     | **Script**                           | **Description** | **Figures** |
+|----------------|---------------------------------------|-----------------|-------------|
+| **fig3_and_S2** | `script_SNP_ChIP_Legube.R` | Compute dsbSNPs in U2OS from mixalime output / plot annotation / compute number of DSB repair protein supporting a SNP | Figure 3a / Figure S2a |
+|                | `script_SNP_ChIP_ADASTRA.R` | Compute dsbSNPs in U2OS from Adastra database / plot annotation | Figure S3c |
+|                | `script_merge_Legube_ADASTRA_dsbSNPs.R` | Merge both dsbSNP datasets, will be used for later computations | — |
+|                | `get_Av_pr.R` | Compute average profiles | Figure 3c, Figure S3d, Figure S4b, Figure 4a, Figure 5e |
+|                | `ES_dsbSNP_scatter heatmap.R` | Compute U2OS dsbSNP pairs panels | Figure S2b |
+| **figS3**      | `GC_skew.R` | Compute delta GCskew for both allele of a SNP within a given window | Figure S3c, Figure 4 |
+|                | `corrplot_and_ES_correlation_hexbin.R` | Compute the correlation matrix and the correlation hexbins between protein binding alterations for SNP from U2OS cell-line | Figure S3d, Figure S3b,e, Figure 4b, Figure S4a |
+| **fig4**       | `script_SNP_enrich_eSNP.R` | Test enrichment of dsbSNPs and ctrlSNPs at eSNPs | Figure 4d,e |
+| **fig5**       | `enrich_motif_TF.R` | Compute TF motif enrichment at dsbSNPs | — |
+|                | `motifs_deltascores_function.R` | Compute dsbSNP effect on TF motif score | — |
 
 ## Reference
 

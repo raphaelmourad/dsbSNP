@@ -23,23 +23,63 @@ library(readr)
 
 library(plyranges)
 
-#load JASPAR 2024 Library
+########################## Create non redondant human pfm##################################
 
 
+
+jaspar_dir <- "/media/sauber/Elements/DSBsnp_project_seb/data/JASPAR_non_redond/"
+jaspar_files <- list.files(jaspar_dir, pattern = "\\.jaspar$", full.names = TRUE)
+
+# Conversion universalmotif -> PFMatrix
+umotif_to_PFMatrix <- function(um) {
+  PFMatrix(
+    ID = um@name,
+    name = um@name,
+    profileMatrix = um@motif,   # PFM brute
+    strand = "+",
+    bg = c(A=0.25, C=0.25, G=0.25, T=0.25)
+  )
+}
+
+#read motifs
+pfms <- list()
+for (f in jaspar_files) {
+  ums <- read_jaspar(f)
+  
+  if (inherits(ums, "universalmotif")) ums <- list(ums)
+  
+  for (um in ums) {
+    pfms[[length(pfms)+1]] <- umotif_to_PFMatrix(um)
+  }
+}
+
+# Create PFMatrixList
+pfm_list <- do.call(PFMatrixList, pfms)
+
+#add names
+names(pfm_list) <- sapply(pfms, function(x) x@name)
+
+# check
+pfm_list
+names(pfm_list)
+
+
+# load Jaspar db
+jaspar_db <- JASPAR2024()
+jaspar_db <- db(jaspar_db)
 JASPAR2024 <- JASPAR2024()
-db(JASPAR2024)
+db(JASPAR2024)#for name calling
 
-#install.packages(("/home/sauber/Downloads/JASPAR2022_0.99.7.tar.gz"), repos=NULL)
 
-DSB_path="/media/sauber/Elements/DSBsnp_project_seb"
-setwd(DSB_path)
-# load(file="results/allelic_imbalance/SNP_DSB/SNP_DSB_ES_corrected_GR.RData")
-# load(file="results/allelic_imbalance/SNP_DSB/SNP_pATM_ES_corrected_GR.RData")
-# load(file="results/allelic_imbalance/SNP_DSB/SNP_RAD51_Adastra_GR.RData")
-# load("results/allelic_imbalance/SNP_DSB/SNP_X53BP1_ES_corrected_GR.RData")
-# mode="pATM"
-# mode="RAD51"
-# mode="53BP1"
+ids <- sapply(pfm_list, function(x) x@ID)
+
+# EXTRACT ONLY HUMAN IDs
+human_pfms <- getMatrixSet(jaspar_db, opts = list(species = 9606, matrix_id = ids))
+human_ids <- names(human_pfms)  # ou sapply(human_pfms, function(x) x@ID)
+pfm_list_human <- pfm_list[names(pfm_list) %in% human_ids]
+
+pfm_list<-pfm_list_human
+############################################extract motif##################################"
 list_mode=c("pATM","RAD51","53BP1")
 list_mode=c("pATM")
 
@@ -112,8 +152,8 @@ names(seqSNPs.seqAlt)<-SNP_DSB.GR$ID
 pm=  5e-03 # p value cutoff for motifMatchr
 
 # get motif scores for each allele
-Annotated_DSB_SNP.seqRef_pos<-matchMotifs(pfm,seqSNPs.seqRef,out="position",ranges=SNP_DSB.GR_W,p.cutoff = pm ) #ajouter le range diminue beaucoup le temps de calcul
-Annotated_DSB_SNP.seqAlt_pos<-matchMotifs(pfm,seqSNPs.seqAlt,out="position",ranges=SNP_DSB.GR_W,p.cutoff = pm )
+Annotated_DSB_SNP.seqRef_pos<-matchMotifs(pfm_list,seqSNPs.seqRef,out="position",ranges=SNP_DSB.GR_W,p.cutoff = pm ) 
+Annotated_DSB_SNP.seqAlt_pos<-matchMotifs(pfm_list,seqSNPs.seqAlt,out="position",ranges=SNP_DSB.GR_W,p.cutoff = pm )
 #?matchMotifs
 
 

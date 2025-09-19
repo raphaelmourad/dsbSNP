@@ -21,25 +21,89 @@ library(gplots)
 library(proxy)
 library(pbmcapply)
 
-
+library(universalmotif)
+library(TFBSTools)
 library(plyranges)
-#load JASPAR 2024 Library
-JASPAR2024<-JASPAR2024()
-JASPAR2024<-db(JASPAR2024)
 DSB_path="/media/sauber/Elements/DSBsnp_project_seb"
 setwd(DSB_path)
 load(file="results/allelic_imbalance/SNP_DSB/SNP_DSB_GR.RData")
 
+########################## Create non redondant human pfm##################################
+
+
+
+jaspar_dir <- "/media/sauber/Elements/DSBsnp_project_seb/data/JASPAR_non_redond/"
+jaspar_files <- list.files(jaspar_dir, pattern = "\\.jaspar$", full.names = TRUE)
+
+# Conversion universalmotif -> PFMatrix
+umotif_to_PFMatrix <- function(um) {
+  PFMatrix(
+    ID = um@name,
+    name = um@name,
+    profileMatrix = um@motif,   # PFM brute
+    strand = "+",
+    bg = c(A=0.25, C=0.25, G=0.25, T=0.25)
+  )
+}
+
+#read motifs
+pfms <- list()
+for (f in jaspar_files) {
+  ums <- read_jaspar(f)
+  
+  if (inherits(ums, "universalmotif")) ums <- list(ums)
+  
+  for (um in ums) {
+    pfms[[length(pfms)+1]] <- umotif_to_PFMatrix(um)
+  }
+}
+
+# Create PFMatrixList
+pfm_list <- do.call(PFMatrixList, pfms)
+
+#add names
+names(pfm_list) <- sapply(pfms, function(x) x@name)
+
+# check
+pfm_list
+names(pfm_list)
+
+
+# load Jaspar db
+jaspar_db <- JASPAR2024()
+jaspar_db <- db(jaspar_db)
+JASPAR2024 <- JASPAR2024()
+db(JASPAR2024)#for name calling
+
+
+ids <- sapply(pfm_list, function(x) x@ID)
+
+# EXTRACT ONLY HUMAN IDs
+human_pfms <- getMatrixSet(jaspar_db, opts = list(species = 9606, matrix_id = ids))
+human_ids <- names(human_pfms)  # ou sapply(human_pfms, function(x) x@ID)
+pfm_list_human <- pfm_list[names(pfm_list) %in% human_ids]
+
+
+
+
+DSB_path="/media/sauber/Elements/DSBsnp_project_seb"
+setwd(DSB_path)
+
+list_mode=c("pATM","RAD51","53BP1")
+#list_mode=c("pATM")
+
+
+
+pfm_list<-pfm_list_human
+
+#############################compute enrich###############################################
+
 SNP_DSB.GR<-SNP_DSB.GR%>% anchor_center()%>%mutate(width = 100) #take 100 bp arround a SNP
 
-#load JASPAR 2024 motif in a pfm
-pfm<-getMatrixSet(x=JASPAR2024,
-                  opts=list(species=9606)
-)
 
 
 #######find motif at SNP regions
-Annotated_DSB_SNP<-matchMotifs(pfm,SNP_DSB.GR,genome='hg19',out = "position",bg = "genome")
+Annotated_DSB_SNP<-matchMotifs(pfm_list,SNP_DSB.GR,genome='hg19',out = "position",bg = "genome")
 #head((motif.matrix@data))
 Annotated_DSB_SNP<-unlist(Annotated_DSB_SNP)
 
@@ -51,7 +115,7 @@ load(file="results/allelic_imbalance/SNP_DSB/SNP_ctrl_dist500kb_GR.RData")
 SNP_ctrl.GR<-sort(sample(SNP_ctrl.GR,length(SNP_DSB.GR)))
 SNP_ctrl.GR<-SNP_ctrl.GR%>% anchor_center()%>%mutate(width = 100) 
 
-Annotated_ctrl_SNP<-matchMotifs(pfm,SNP_ctrl.GR,genome='hg19',out = "position",bg = "genome")
+Annotated_ctrl_SNP<-matchMotifs(pfm_list,SNP_ctrl.GR,genome='hg19',out = "position",bg = "genome")
 #head((motif.matrix@data))
 Annotated_ctrl_SNP<-unlist(Annotated_ctrl_SNP)
 Annotated_ctrl_SNP$motif=names(Annotated_ctrl_SNP)
