@@ -27,7 +27,9 @@ The scripts were written with R, and need some packages :
     tout lister
 
 
-## Folders
+## Scripts
+
+Below are summarized in a table all the scripts for data analysis and plot generation.
 
 | **Folder**     | **Script**                           | **Description** | **Figures** |
 |----------------|---------------------------------------|-----------------|-------------|
