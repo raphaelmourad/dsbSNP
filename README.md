@@ -20,12 +20,12 @@ Fastq files are available from MTAB accession E-MTAB-15637, E-MTAB-15639 and XX.
 
 The scripts were written with R, and need some packages :
 
-    library(rtracklayer).
-    library(BSgenome.Hsapiens.UCSC.hg19).
-    library(ggplot2).
-    library(reshape2).
-    library(dplyr).
-    library(Homo.sapiens).
+    library(rtracklayer)
+    library(BSgenome.Hsapiens.UCSC.hg19)
+    library(ggplot2)
+    library(reshape2)
+    library(dplyr)
+    library(Homo.sapiens)
 
 
 ## Scripts
