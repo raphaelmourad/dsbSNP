@@ -19,7 +19,7 @@ Fastq files are available from MTAB accession E-MTAB-15637, E-MTAB-15639 and XX.
 ## Requirements
 
 The scripts were written with R, and need some packages :
-
+```R
 library(dplyr)
 library(tidyr)
 library(corrplot)
@@ -82,6 +82,7 @@ library(bnlearn)
 library(GWASTools)
 library(LDlinkR)
 library(readxl) 
+```
 
 To install Selene, please see: https://github.com/FunctionLab/selene/tree/master
 
