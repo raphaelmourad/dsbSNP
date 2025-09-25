@@ -27,6 +27,7 @@ The scripts were written with R, and need some packages :
     library(dplyr)
     library(Homo.sapiens)
 
+To install Selene, please see: https://github.com/FunctionLab/selene/tree/master
 
 ## Scripts
 
