@@ -26,7 +26,6 @@ The scripts were written with R, and need some packages :
     library(reshape2).
     library(dplyr).
     library(Homo.sapiens).
-    tout lister
 
 
 ## Scripts
