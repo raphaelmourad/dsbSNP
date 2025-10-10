@@ -102,6 +102,12 @@ Below are summarized in a table all the scripts for data analysis and plot gener
 | **fig4**       | `script_SNP_enrich_eSNP.R` | Test enrichment of dsbSNPs and ctrlSNPs at eSNPs | Figure 4d,e |
 | **fig5**       | `enrich_motif_TF.R` | Compute TF motif enrichment at dsbSNPs | — |
 |                | `motifs_deltascores_function.R` | Compute dsbSNP effect on TF motif score | — |
+| **fig6**       | `get_harmonized_pval_list.R` | Get GWAS p-values dsbSNP and ctrlSNPs overlapping with GWAS SNPs | — |
+|                | `Fisher_test_by_EFO.R` | Compute Fisher test enrichment | — |
+|                | `Fisher_barplot.R` | Plot enrichement for diseases associated with dsbSNPs | Figure 6b |
+|                | `get_lambda.R` | Compute Lambda score by diseases | Figure S6a |
+|                | `get_lambda_bars_and_boxplot.R` | Plot lambda for associated diseases | Figure S6a |
+
 
 ## Reference
 
