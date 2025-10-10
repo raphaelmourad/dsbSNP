@@ -14,7 +14,7 @@ The dsbSNP bed files are available:
 
 All SNPs including dsbSNPs, but also histone mark SNPs, ATAC-seq SNPs, DRIP-seq SNPs are available here: https://www.data.gouv.fr/datasets/dsbsnp/.
 
-For more SNPs from the ADASTRA database, see: https://adastra.autosome.org/mabel
+For more SNPs from the ADASTRA database, see: https://adastra.autosome.org/
 
 ## Requirements
 
