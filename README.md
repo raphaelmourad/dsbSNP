@@ -106,7 +106,7 @@ Below are summarized in a table all the scripts for data analysis and plot gener
 |                | `Fisher_test_by_EFO.R` | Compute Fisher test enrichment | — |
 |                | `Fisher_barplot.R` | Plot enrichement for diseases associated with dsbSNPs | Figure 6b |
 |                | `get_lambda.R` | Compute Lambda score by diseases | Figure S6a |
-|                | `get_lambda_bars_and_boxplot.R` | Plot lambda for associated diseases | Figure S6a |
+|                | `get_lambda_bars_and_boxplot.R` | Plot lambda for associated diseases | Figure 6c, S6a, S6c |
 
 
 ## Reference
