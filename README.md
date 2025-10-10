@@ -14,8 +14,6 @@ The dsbSNPs bed file is available:
 
 All SNPs including dsbSNPs, but also histone mark SNPs, ATAC-seq SNPs, DRIP-seq SNPs are available here: https://www.data.gouv.fr/datasets/dsbsnp/.
 
-Fastq files are available from MTAB accession E-MTAB-15637, E-MTAB-15639 and E-MTAB-15750 for novel experiments (see the full list of E-MTAB accessions from the article). 
-
 ## Requirements
 
 The scripts were written with R, and need some packages :
