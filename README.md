@@ -111,7 +111,7 @@ Below are summarized in a table all the scripts for data analysis and plot gener
 
 ## Reference
 
-Sebastien Auber, Sarah Collins, Andrey Buyan, Ariuna Aiusheeva, Anne-Laure Finoux, Florian Saur, Sarah Cohen, Vincent Rocher, Coline Arnould, Marie Verbanck, View ORCID ProfileIvan V. Kulakovskiy, Gaelle Legube, Raphael Mourad. A novel class of non-coding variants driving DNA double-strand breaks is associated with complex genetic diseases. medRxiv https://www.medrxiv.org/content/10.1101/2025.10.16.25338147v1
+- Sebastien Auber, Sarah Collins, Andrey Buyan, Ariuna Aiusheeva, Anne-Laure Finoux, Florian Saur, Sarah Cohen, Vincent Rocher, Coline Arnould, Marie Verbanck, View ORCID ProfileIvan V. Kulakovskiy, Gaelle Legube, Raphael Mourad. A novel class of non-coding variants driving DNA double-strand breaks is associated with complex genetic diseases. medRxiv https://www.medrxiv.org/content/10.1101/2025.10.16.25338147v1
 
 # Contact: 
 sebastien.auber@univ-tlse3.fr (PhD student) \
