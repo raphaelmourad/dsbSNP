@@ -8,7 +8,7 @@ This is the github repository of our paper "A novel class of non-coding variants
 
 ## Data Availability
 
-The dsbSNP bed files are available: 
+The dsbSNP bed files (hg19) are available: 
 - dsbSNPs_ADASTRA.tsv (for dsbSNPs from Legube's team data)
 - dsbSNPs_ADASTRA.tsv (for dsbSNPs extracted from ADASTRA database).
 
